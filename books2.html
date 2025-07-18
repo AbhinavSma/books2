@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="sidebar.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Books Collection | ScienceAndFacts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #87CEEB;
+            --primary-dark: #5F9EA0;
+            --secondary: #ffffff;
+            --accent: #4a90e2;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f9ff 0%, #e8f4ff 100%);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover;
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s both;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s both 0.3s;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Books Grid */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        /* Book Card */
+        .book-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            transform: translateY(0);
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .book-card:nth-child(1) { animation-delay: 0.1s; }
+        .book-card:nth-child(2) { animation-delay: 0.2s; }
+        .book-card:nth-child(3) { animation-delay: 0.3s; }
+        .book-card:nth-child(4) { animation-delay: 0.4s; }
+        .book-card:nth-child(5) { animation-delay: 0.5s; }
+        .book-card:nth-child(6) { animation-delay: 0.6s; }
+        .book-card:nth-child(7) { animation-delay: 0.7s; }
+        .book-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .book-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .book-cover {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .book-info {
+            padding: 1.8rem;
+            position: relative;
+        }
+
+        .book-category {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .book-card:hover .book-title {
+            color: var(--primary-dark);
+        }
+
+        .book-author {
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .book-author i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
+        .book-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.6;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .book-pages, .book-year {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+        }
+
+        .book-pages i, .book-year i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .read-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .read-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+        }
+
+        .read-btn:hover::before {
+            left: 100%;
+        }
+
+        .read-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .books-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar Toggle Button -->
+<button class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h3>Science & Facts</h3>
+    </div>
+    <ul class="sidebar-menu">
+        <li>
+            <a href="main.html">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </li>
+        <li>
+            <a href="dictionary.html">
+                <i class="fas fa-book"></i> Dictionary
+            </a>
+        </li>
+        <li>
+            <a href="Quiz.html">
+                <i class="fas fa-question-circle"></i> Quiz
+            </a>
+        </li>
+        <li>
+            <a href="test.html">
+                <i class="fas fa-lightbulb"></i> Facts & Discoveries
+            </a>
+        </li>
+        <li>
+            <a href="Games.html">
+                <i class="fas fa-gamepad"></i> Science Games
+            </a>
+        </li>
+ <li>
+            <a href="trying.html">
+                <i class="fas fa-book-open"></i> Books & Magzines
+            </a>
+        </li>
+    </ul>
+</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="floating">Science Books Collection</h1>
+            <p>Explore our carefully curated selection of scientific literature across various disciplines</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section-header">
+            <h2>Featured Publications</h2>
+            <p>Discover books that bridge the gap between complex scientific concepts and practical understanding</p>
+        </div>
+
+        <div class="books-grid">
+            <!-- Book 1 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Natural Sciences">
+                    <div class="book-badge">Bestseller</div>
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Science</span>
+                    <h3 class="book-title">Natural Sciences</h3>
+                    <p class="book-author"><i class="fas fa-user-edit"></i> Siyavula</p>
+                    <p class="book-desc">A comprehensive guide covering fundamental concepts in physics, chemistry, and biology with practical examples and illustrations.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 420 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2021</span>
+                    </div>
+                    <a href="1.%20Natural%20Sciences%20Author%20Siyavula.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Natural Sciences and Technology">
+                    <div class="book-badge">New</div>
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Technology</span>
+                    <h3 class="book-title">Natural Sciences & Technology</h3>
+                    <p class="book-author"><i class="fas fa-user-edit"></i> Siyavula</p>
+                    <p class="book-desc">Explore how scientific principles drive technological innovation with real-world applications and case studies.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 380 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2022</span>
+                    </div>
+                    <a href="2.%20Natural%20Sciences%20and%20Technology%20Author%20Siyavula.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1605722243979-fe0be8158232?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Numerical Methods">
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Meteorology</span>
+                    <h3 class="book-title">Numerical Methods in Meteorology</h3>
+                    <p class="book-author"><i class="fas fa-users"></i> Kristofer Doos, Peter Lundberg, Aitor Aldama</p>
+                    <p class="book-desc">Essential computational techniques for atmospheric sciences with practical implementations for weather prediction models.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 510 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2020</span>
+                    </div>
+                    <a href="23.%20Basic%20Numerical%20Methods%20in%20Meteorology%20and%20Oceanography%20Author%20Kristofer%20Doos,%20Peter%20Lundberg%20and%20Aitor%20Aldama%20Campino.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Agricultural Meteorology">
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Agriculture</span>
+                    <h3 class="book-title">Agricultural Meteorology</h3>
+                    <p class="book-author"><i class="fas fa-users"></i> Branislava Lalic et al.</p>
+                    <p class="book-desc">Comprehensive analysis of climate-agriculture relationships and strategies for climate-resilient farming practices.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 450 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2019</span>
+                    </div>
+                    <a href="22.%20Agricultural%20Meteorology%20and%20Climatology%20Author%20Branislava%20Lalic,%20Josef%20Eitzinger,%20Anna%20Dalla%20Marta,%20Simone%20Orlandini,%20Ana%20Firanj%20Sremac%20and%20Bernhard%20Pacher.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Geochemistry">
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Earth Science</span>
+                    <h3 class="book-title">Geochemistry</h3>
+                    <p class="book-author"><i class="fas fa-users"></i> Milos René, Gemma Aiello, Gaafar El Bahariya</p>
+                    <p class="book-desc">Detailed exploration of Earth's chemical composition with applications in environmental science and resource exploration.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 480 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2021</span>
+                    </div>
+                    <a href="21.%20Geochemistry%20Author%20Milos%20René,%20Gemma%20Aiello%20and%20Gaafar%20El%20Bahariya.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 6 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="General Astronomy">
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Astronomy</span>
+                    <h3 class="book-title">General Astronomy</h3>
+                    <p class="book-author"><i class="fas fa-user-edit"></i> Wikibooks</p>
+                    <p class="book-desc">Fundamental concepts of astronomy from celestial mechanics to cosmology with stunning visual references.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 360 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2020</span>
+                    </div>
+                    <a href="15.%20General%20Astronomy%20Author%20Wikibooks.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 7 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Discover Physics">
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Physics</span>
+                    <h3 class="book-title">Discover Physics</h3>
+                    <p class="book-author"><i class="fas fa-user-edit"></i> Benjamin Crowell</p>
+                    <p class="book-desc">Conceptual approach to physics emphasizing understanding through real-world applications and thought experiments.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 520 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2018</span>
+                    </div>
+                    <a href="11.%20Discover%20Physics%20Author%20Benjamin%20Crowell.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Book 8 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Models In Biology">
+                </div>
+                <div class="book-info">
+                    <span class="book-category">Biology</span>
+                    <h3 class="book-title">Models In Biology</h3>
+                    <p class="book-author"><i class="fas fa-user-edit"></i> Attihro Georg Striedter</p>
+                    <p class="book-desc">Critical examination of modeling approaches in biological research with historical context and philosophical insights.</p>
+                    <div class="book-meta">
+                        <span class="book-pages"><i class="fas fa-book-open"></i> 390 pages</span>
+                        <span class="book-year"><i class="fas fa-calendar-alt"></i> 2019</span>
+                    </div>
+                    <a href="6.%20Models%20In%20Biology%20-%20History,%20Philosophy,%20and%20Practical%20Concerns%20Atuhro%20Georg%20Striedter.pdf" class="read-btn" download>
+                        Read Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">ScienceAndFacts</div>
+            <div class="footer-links">
+                <a href="main.html">Home</a>
+                <a href="trying.html">Books</a>
+                <a href="Quiz.html">Quiz</a>
+                <a href="Games.html">Games</a>
+                <a href="test.html">Facts&Discoveries</a>
+                <a href="dictionary.html">Dictionary</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="copyright">© 2023 ScienceAndFacts. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Additional animation triggers
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.book-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = `fadeInUp 0.6s forwards`;
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+<script src="sidebar.js"></script>
+</body>
+</html>
